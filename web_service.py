@@ -106,4 +106,4 @@ class identifier(Resource):
 
 if __name__ == "__main__":
     from waitress import serve
-    serve(app,port=8885, host='localhost')
+    serve(app)
