@@ -11,7 +11,7 @@ from decoupagevedio import decoupage
 from trainning import trainig
 
 app = Flask(__name__)
-api = Api(app=app, version='0.1', title='ApiV', description='', validate=True)
+api = Api(app=app, version='0.1', title='ApiV', description='',security='https', validate=True)
 
 """ UPLOAD_DIRECTORY = "/unkownPic" """
 
