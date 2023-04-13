@@ -9,9 +9,12 @@ from werkzeug.datastructures import FileStorage
 import face_rec
 from decoupagevedio import decoupage
 from trainning import trainig
+from werkzeug.middleware.proxy_fix import ProxyFix
 
 app = Flask(__name__)
-api = Api(app=app, version='0.1', title='ApiV', description='', doc='/api/docs/',  
+
+app.wsgi_app = ProxyFix(app.wsgi_app)
+api = Api(app=app, version='0.1', title='ApiV', description='',
     security='https',
     SWAGGER_SUPPORTED_SUBMIT_METHODS=['get', 'post', 'put', 'delete'], 
     SWAGGER_UI_REQUEST_HEADERS={'Content-Type': 'application/json'}, validate=True)
