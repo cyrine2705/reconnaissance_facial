@@ -1,3 +1,4 @@
+from datetime import timedelta
 import json
 import os
 import shutil
@@ -24,7 +25,7 @@ api = Api(app=app, version='0.1', title='ApiV', description='',
 
 @api.route("/training/")
 class identifier(Resource):
-    app.config['PERMANENT_SESSION_LIFETIME'] = 600
+    app.permanent_session_lifetime = timedelta(minutes=60)
     def get(self):
         trainig()
 
