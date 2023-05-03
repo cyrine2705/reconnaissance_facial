@@ -24,7 +24,6 @@ api = Api(app=app, version='0.1', title='ApiV', description='',
 
 @api.route("/training/")
 class identifier(Resource):
-    request.environ['werkzeug.server.shutdown'] = lambda: None
     app.config['PERMANENT_SESSION_LIFETIME'] = 600
     def get(self):
         trainig()
