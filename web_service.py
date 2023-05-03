@@ -1,7 +1,7 @@
-from datetime import timedelta
 import json
 import os
 import shutil
+import time
 import flask
 import werkzeug
 from flask import Flask, request
@@ -27,6 +27,7 @@ api = Api(app=app, version='0.1', title='ApiV', description='',
 class identifier(Resource):
     def get(self):
         trainig()
+        time.sleep(600)
 
 
 
@@ -118,4 +119,6 @@ class identifier(Resource):
 if __name__ == "__main__":
     from waitress import serve
     port = int(os.environ.get('PORT', 8885))
-    serve(app,port=port,timeout=1000)
+    
+    serve(app,port=port)
+    time.sleep(600)
