@@ -5,7 +5,7 @@ import shutil
 import flask
 import werkzeug
 from flask import Flask, request
-
+from flask_cors import CORS, cross_origin
 from flask_restplus import Api, Resource , fields
 from werkzeug.datastructures import FileStorage
 import face_rec
@@ -22,6 +22,7 @@ api = Api(app=app, version='0.1', title='ApiV', description='',
     SWAGGER_UI_REQUEST_HEADERS={'Content-Type': 'application/json'}, validate=True)
 
 """ UPLOAD_DIRECTORY = "/unkownPic" """
+@cross_origin("*")
 
 @api.route("/training/")
 class identifier(Resource):
@@ -116,5 +117,6 @@ class identifier(Resource):
 
 if __name__ == "__main__":
     from waitress import serve
+    CORS(app)
     port = int(os.environ.get('PORT', 8885))
     serve(app,port=port)
