@@ -23,7 +23,6 @@ api = Api(app=app, version='0.1', title='ApiV', description='',
 
 """ UPLOAD_DIRECTORY = "/unkownPic" """
 @cross_origin("*")
-
 @api.route("/training/")
 class identifier(Resource):
     def get(self):
@@ -34,8 +33,8 @@ class identifier(Resource):
 parser_video = api.parser()
 parser_video.add_argument('file', location='files', type=FileStorage, required=True)
 
+@cross_origin("*")
 @api.route('/with-parser-video/parser-video/')
-
 @api.expect(parser_video)
 class WithParserResourcevideo(Resource):
     @api.doc(parser=parser_video)
@@ -66,6 +65,7 @@ class decoupeV(Resource):
 
 parser = api.parser()
 parser.add_argument('file', location='files', type=FileStorage, required=True)
+@cross_origin("*")
 @api.route('/with-parser/parser/')
 @api.expect(parser)
 class WithParserResource(Resource):
