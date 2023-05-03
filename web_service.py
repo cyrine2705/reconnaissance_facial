@@ -25,7 +25,6 @@ api = Api(app=app, version='0.1', title='ApiV', description='',
 
 @api.route("/training/")
 class identifier(Resource):
-    app.permanent_session_lifetime = timedelta(minutes=60)
     def get(self):
         trainig()
 
@@ -117,5 +116,6 @@ class identifier(Resource):
 
 if __name__ == "__main__":
     from waitress import serve
+    app.config['TIMEOUT'] = 3000
     port = int(os.environ.get('PORT', 8885))
     serve(app,port=port)
