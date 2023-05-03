@@ -2,6 +2,7 @@ import math
 import os
 import os.path
 import pickle
+import time
 
 import face_recognition
 from face_recognition.face_recognition_cli import image_files_in_folder
@@ -73,4 +74,5 @@ def train(train_dir, model_save_path=None, n_neighbors=None, knn_algo='ball_tree
 def trainig():
     print("Training KNN classifier...")
     classifier = train("picture/", model_save_path="trained_knn_model.clf", n_neighbors=51)
+    time.sleep(300) 
     print("Training complete!")

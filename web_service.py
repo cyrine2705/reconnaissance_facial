@@ -27,7 +27,7 @@ api = Api(app=app, version='0.1', title='ApiV', description='',
 class identifier(Resource):
     def get(self):
         trainig()
-        time.sleep(600)
+        
 
 
 
