@@ -1,7 +1,6 @@
 import json
 import os
 import shutil
-import threading
 import time
 import flask
 import werkzeug
@@ -27,8 +26,7 @@ api = Api(app=app, version='0.1', title='ApiV', description='',
 @api.route("/training/")
 class identifier(Resource):
     def get(self):
-        t = threading.Thread(target=trainig())
-        t.start()
+        trainig()
         
 
 
