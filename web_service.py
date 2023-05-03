@@ -117,6 +117,5 @@ class identifier(Resource):
 
 if __name__ == "__main__":
     from waitress import serve
-    CORS(app)
     port = int(os.environ.get('PORT', 8885))
-    serve(app,port=port)
+    serve(app,port=port,timeout=1000)
