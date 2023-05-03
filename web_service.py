@@ -116,6 +116,5 @@ class identifier(Resource):
 
 if __name__ == "__main__":
     from waitress import serve
-    app.config['TIMEOUT'] = 3000
     port = int(os.environ.get('PORT', 8885))
     serve(app,port=port)
