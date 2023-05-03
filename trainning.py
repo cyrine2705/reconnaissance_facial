@@ -2,7 +2,6 @@ import math
 import os
 import os.path
 import pickle
-import threading
 import time
 
 import face_recognition
@@ -73,8 +72,7 @@ def train(train_dir, model_save_path=None, n_neighbors=None, knn_algo='ball_tree
 
     return knn_clf
 def trainig():
-    classifier = train("picture/", model_save_path="trained_knn_model.clf", n_neighbors=51)
     print("Training KNN classifier...")
-    t = threading.Thread(target=classifier)
-    t.start()
-    print("Started background training process")
+    classifier = train("picture/", model_save_path="trained_knn_model.clf", n_neighbors=51)
+    
+    print("Training complete!")
