@@ -1,6 +1,5 @@
 FROM python:3.9-slim-buster
 
-RUN pip install --upgrade pip
 # Install FFmpeg
 RUN apt-get update && \
     apt-get install -y ffmpeg

@@ -5,7 +5,7 @@ import time
 import flask
 import werkzeug
 from flask import Flask, request
-#from flask_cors import CORS, cross_origin
+from flask_cors import CORS, cross_origin
 from flask_restplus import Api, Resource , fields
 from werkzeug.datastructures import FileStorage
 import face_rec
@@ -14,6 +14,7 @@ from trainning import trainig
 from werkzeug.middleware.proxy_fix import ProxyFix
 
 app = Flask(__name__)
+CORS(app)
 
 app.wsgi_app = ProxyFix(app.wsgi_app)
 api = Api(app=app, version='0.1', title='ApiV', description='',
@@ -22,7 +23,7 @@ api = Api(app=app, version='0.1', title='ApiV', description='',
     SWAGGER_UI_REQUEST_HEADERS={'Content-Type': 'application/json'}, validate=True)
 
 """ UPLOAD_DIRECTORY = "/unkownPic" """
-#@cross_origin("*")
+
 @api.route("/training/")
 class identifier(Resource):
     def get(self):
@@ -66,7 +67,7 @@ class decoupeV(Resource):
 
 parser = api.parser()
 parser.add_argument('file', location='files', type=FileStorage, required=True)
-#@cross_origin("*")
+
 @api.route('/with-parser/parser/')
 @api.expect(parser)
 class WithParserResource(Resource):
@@ -117,8 +118,9 @@ class identifier(Resource):
 
 
 if __name__ == "__main__":
+    
     from waitress import serve
     port = int(os.environ.get('PORT', 8885))
     
     serve(app,port=port)
-    time.sleep(600)
+

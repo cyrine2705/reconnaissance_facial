@@ -2,11 +2,14 @@ import math
 import os
 import os.path
 import pickle
-import time
 
 import face_recognition
 from face_recognition.face_recognition_cli import image_files_in_folder
 from sklearn import neighbors
+from sklearn.metrics import accuracy_score, precision_score
+
+from sklearn.model_selection import train_test_split
+
 
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 
@@ -58,12 +61,35 @@ def train(train_dir, model_save_path=None, n_neighbors=None, knn_algo='ball_tree
     # Determine how many neighbors to use for weighting in the KNN classifier
     if n_neighbors is None:
         n_neighbors = int(round(math.sqrt(len(X))))
-        if verbose:
-            print("Chose n_neighbors automatically:", n_neighbors)
+        print("Chose n_neighbors automatically:", n_neighbors)
+        
 
     # Create and train the KNN classifier
+    
     knn_clf = neighbors.KNeighborsClassifier(n_neighbors=n_neighbors, algorithm=knn_algo, weights='distance')
+    X, X_test, y, y_test = train_test_split(X, y,test_size=0.5) 
     knn_clf.fit(X, y)
+    y_pred = knn_clf.predict(X_test)
+        
+        
+    accuracy = accuracy_score(y_test, y_pred)
+        
+        
+    print("Accuracy:", accuracy)
+    
+    
+    
+    
+    
+   
+    """ for i in range(988, 1000):
+     n_neighbors = int(round(math.sqrt(len(X))))
+     neigh = neighbors.KNeighborsClassifier(n_neighbors=n_neighbors, algorithm=knn_algo, weights='distance')
+     X, x_test, y, y_test = train_test_split(X, y,test_size=0.5) 
+     neigh.fit(X, y)
+     neighbors.KNeighborsClassifier(...)
+     score = neigh.score (x_test,y_test)
+     print("Modele "+str(i)+": "+str(score*100)+"% précision") """
 
     # Save the trained KNN classifier
     if model_save_path is not None:
@@ -71,8 +97,19 @@ def train(train_dir, model_save_path=None, n_neighbors=None, knn_algo='ball_tree
             pickle.dump(knn_clf, f)
 
     return knn_clf
-def trainig():
+""" if __name__ == "__main__":
     print("Training KNN classifier...")
-    classifier = train("picture/", model_save_path="trained_knn_model.clf", n_neighbors=51)
+    classifier = train("picture/", model_save_path="trained_knn_model.clf",n_neighbors=None)
+    print("Training complete!") """
+
+
+
+def trainig():
     
+    print("Training KNN classifier...")
+    classifier = train("picture/", model_save_path="trained_knn_model.clf", n_neighbors=None)
     print("Training complete!")
+    
+    
+
+
